@@ -4,7 +4,7 @@
             class="rounded"
             type="search"
             placeholder="search..."
-            (keyup) = 'filtro = $event.target.value'
+            (keyup) = 'debounce.next($event.target.value)'
             autofocus>
     </form>
 </div>
@@ -12,3 +12,4 @@
     Sorry, no photos
 </p>
 <apj-photos [photos] = 'photos | filtraDescricao : filtro'></apj-photos>
+<apj-load-button (click)='paginacao()' [hasMore] = 'hasMore'></apj-load-button>
