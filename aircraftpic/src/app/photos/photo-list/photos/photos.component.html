@@ -1,0 +1,5 @@
+<ol class="list-unstyled">
+  <li *ngFor='let row of Rows' class="row">
+    <apj-photo *ngFor = 'let photo of row' [url] = 'photo.url' [descricao]='photo.descricao' [legenda]='photo.legenda' class="col-4"></apj-photo>
+  </li>
+</ol>

@@ -1,1 +1,14 @@
-<apj-photo *ngFor='let photo of photos' [url] = 'photo.url' [descricao]='photo.descricao' [legenda]='photo.legenda'></apj-photo>
+<div class="text-center mt-3 mb-3">
+    <form>
+        <input
+            class="rounded"
+            type="search"
+            placeholder="search..."
+            (keyup) = 'filtro = $event.target.value'
+            autofocus>
+    </form>
+</div>
+<p class="text-center text-muted" *ngIf="!photos.length">
+    Sorry, no photos
+</p>
+<apj-photos [photos] = 'photos | filtraDescricao : filtro'></apj-photos>
