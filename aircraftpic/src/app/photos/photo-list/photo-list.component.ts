@@ -37,7 +37,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
       .listarPorPaginas(this.userName, ++this.pagina)
       .subscribe(photos => {
         this.photos = this.photos.concat(...photos);
-        if(!photos.length) this.hasMore = false;
+        if(!photos.length || photos.length % 3 != 0) this.hasMore = false;
       });
   }
 
