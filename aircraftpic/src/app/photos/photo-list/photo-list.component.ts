@@ -11,7 +11,7 @@ import { PhotoService } from '../photo/photo.service';
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.css']
 })
-export class PhotoListComponent implements OnInit, OnDestroy {
+export class PhotoListComponent implements OnInit {
 
   photos: Photo[] = [];
   filtro = '';
@@ -23,12 +23,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
   constructor(private activedRouter: ActivatedRoute, private service: PhotoService) {}
 
   ngOnInit(): void {
-    this.debounce.pipe(debounceTime(300)).subscribe(filter => this.filtro = filter)
     this.photos = this.activedRouter.snapshot.data.photo;
-  }
-
-  ngOnDestroy(): void {
-    this.debounce.unsubscribe();
   }
 
   paginacao(){
@@ -36,6 +31,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
     this.service
       .listarPorPaginas(this.userName, ++this.pagina)
       .subscribe(photos => {
+        this.filtro = '';
         this.photos = this.photos.concat(...photos);
         if(!photos.length || photos.length % 3 != 0) this.hasMore = false;
       });
