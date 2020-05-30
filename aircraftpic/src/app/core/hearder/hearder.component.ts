@@ -10,9 +10,13 @@ import { User } from '../user/user';
 })
 export class HeaderComponent {
     @Input() titulo: string;
-    user: User
+    user$: Observable<User>
 
     constructor(private userService: UserService) {
-        this.userService.getUser().subscribe(user => this.user = user);
+        this.user$ = this.userService.getUser();
+    }
+
+    logout(){
+        this.userService.logOut();
     }
 }
