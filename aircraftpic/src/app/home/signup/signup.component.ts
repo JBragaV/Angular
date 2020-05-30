@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
 import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
 import { lowCaseValidator } from 'src/app/shared/validators/low-case.validator';
 import { NewUser } from './new-user';
 import { SignupService } from './signup.service';
 
 @Component({
-    templateUrl: './signup.component.html'
+    templateUrl: './signup.component.html',
+    providers: [UserNotTakenValidatorService]
 })
 export class SignupComponent implements OnInit{
 

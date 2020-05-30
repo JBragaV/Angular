@@ -16,10 +16,9 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     PhotosModule,
-    AppRoutingModule,
     ErrorsModule,
-    HomeModule,
-    CoreModule
+    CoreModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

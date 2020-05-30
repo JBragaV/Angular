@@ -5,17 +5,23 @@ import { PhotoListComponent } from './photos/photo-list/photo-list.component';
 import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { PhotoListResolve } from './photos/photo-list.resolve';
-import { SignInComponent } from './home/signin/signin.component';
-import { AuthGuard } from './core/auth/auth.guard';
-import { SignupComponent } from './home/signup/signup.component';
+import {} from './home/home.module' 
 
 const rotas:Routes = [
 
-    {path: '', component: SignInComponent, canActivate: [AuthGuard]},
-    {path: 'cadastrar', component: SignupComponent},
-    {path: 'lista/:userName',
-     component: PhotoListComponent,
-      resolve: {
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home',
+    },
+    {
+        path: 'home', 
+        loadChildren: './home/home.module#HomeModule'
+    },
+    {
+        path: 'lista/:userName',
+        component: PhotoListComponent,
+        resolve: {
           photo: PhotoListResolve
         }
     }, 
@@ -25,7 +31,7 @@ const rotas:Routes = [
 
 @NgModule({
     imports: [ RouterModule.forRoot(rotas) ],
-    exports: [ RouterModule ]
+    exports: [ RouterModule ],
 })
 
 export class AppRoutingModule {
