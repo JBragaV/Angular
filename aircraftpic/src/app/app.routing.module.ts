@@ -6,6 +6,7 @@ import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { PhotoListResolve } from './photos/photo-list.resolve';
 import {} from './home/home.module' 
+import { AuthGuard } from './core/auth/auth.guard';
 
 const rotas:Routes = [
 
@@ -25,7 +26,12 @@ const rotas:Routes = [
           photo: PhotoListResolve
         }
     }, 
-    {path: 'p/add', component: PhotoFormComponent},
+    {
+        path: 'p/add', 
+        component: PhotoFormComponent,
+        canActivate: [AuthGuard]
+        
+    },
     {path: '**', component: NotFoundComponent}
 ]
 

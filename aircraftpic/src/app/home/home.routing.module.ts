@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { AuthGuard } from '../core/auth/auth.guard';
+
 import { SignInComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { LoginAuth } from '../core/auth/login.guard';
 
 const rotas = [
     {path: '', 
         component: HomeComponent, 
-        canActivate: [AuthGuard],
+        canActivate: [LoginAuth],
         children: [
             {path: '', component: SignInComponent},
             {path: 'cadastrar', component: SignupComponent},

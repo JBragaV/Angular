@@ -6,9 +6,7 @@ import { PhotoFormModule } from './photo-form/photo-form.module';
 import { PhotolistModule } from './photo-list/photo-list.module';
 
 @NgModule({
-    declarations:[ 
-
-    ],
+    declarations:[],
     imports: [  
         CommonModule,
         PhotoModule,

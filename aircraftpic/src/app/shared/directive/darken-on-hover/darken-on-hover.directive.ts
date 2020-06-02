@@ -8,7 +8,7 @@ export class DarkenOnHover {
 
     valor = "70%";
     constructor(
-        private el: ElementRef,
+        private el: ElementRef<any>,
         private render: Renderer
     ) {}
 
