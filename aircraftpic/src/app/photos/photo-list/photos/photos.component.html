@@ -4,13 +4,15 @@
 <ol class="list-unstyled">
   <li *ngFor='let row of Rows' class="row no-gutters">
     <div *ngFor = 'let photo of row' class="col-4" darken>
-      <apj-card [titulo] = 'photo.description'>
-        <apj-photo  [url] = 'photo.url' [descricao]='photo.description' [legenda]='photo.legenda'></apj-photo>
-        <div class="text-center">
-          <i aria-hidden="true" class="fa fa-heart-o fa-1x mr-2"></i>{{ photo.likes }}
-          <i aria-hidden="true" class="fa fa-comment-o fa-1x mr-2 ml-2"></i>{{ photo.comments }}
-        </div>
-      </apj-card>
+      <a [routerLink]="['/p', photo.id]">
+        <apj-card [titulo] = 'photo.description'>
+          <apj-photo  [url] = 'photo.url' [descricao]='photo.description' [legenda]='photo.legenda'></apj-photo>
+          <div class="text-center">
+            <i aria-hidden="true" class="fa fa-heart-o fa-1x mr-2"></i>{{ photo.likes }}
+            <i aria-hidden="true" class="fa fa-comment-o fa-1x mr-2 ml-2"></i>{{ photo.comments }}
+          </div>
+        </apj-card>
+      </a>
     </div>
   </li>
 </ol>

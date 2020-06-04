@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Photo } from './photo';
+import { PhotoComment } from '../photo-comment';
 
 const urlBase = 'http://localhost:3000/';
 
@@ -28,5 +29,23 @@ export class PhotoService {
         formData.append('allowComments', permitirComentario ? 'true' : 'false');
         formData.append('imageFile', file);
         return this.http.post(`${urlBase}photos/upload`, formData);
+    }
+
+    selectById(id: number){
+        return this.http.get<Photo>(`${urlBase}photos/${id}`);
+    }
+
+    getComment(id: number){
+        console.log("Chamei a função getComment")
+        return this.http.get<PhotoComment[]>(`${urlBase}photos/${id}/comments`);
+    }
+
+    addComment(id: number, commentText: string){
+        console.log("Chamei a função addComment")
+        return this.http.post(`${urlBase}photos/${id}/comments`,{commentText});
+    }
+
+    remove(id: number){
+        return this.http.delete(`${urlBase}photos/${id}`);
     }
 }

@@ -15,7 +15,7 @@ export class PhotoListComponent implements OnInit {
 
   photos: Photo[] = [];
   filtro = '';
-  debounce: Subject<string> = new Subject<string>();
+  //debounce: Subject<string> = new Subject<string>();
   pagina: number = 1;
   userName: string = '';
   hasMore: boolean = true;
@@ -23,7 +23,11 @@ export class PhotoListComponent implements OnInit {
   constructor(private activedRouter: ActivatedRoute, private service: PhotoService) {}
 
   ngOnInit(): void {
-    this.photos = this.activedRouter.snapshot.data.photo;
+    this.activedRouter.params.subscribe(params => {
+      this.userName = params.userName;
+      this.photos = this.activedRouter.snapshot.data.photo;
+    });
+    
   }
 
   paginacao(){
