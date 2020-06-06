@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PhotoService } from '../photo/photo.service';
+import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'apj-photo-form',
@@ -17,7 +19,9 @@ export class PhotoFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private router: Router,
-    private photoService: PhotoService) { }
+    private photoService: PhotoService,
+    private alertService: AlertService,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.formAdd = this.formBuilder.group({
@@ -32,7 +36,13 @@ export class PhotoFormComponent implements OnInit {
     const permitirComentario = this.formAdd.get('allowComments').value;
     this.photoService
       .upload(descricao, permitirComentario, this.file)
-      .subscribe(()=> this.router.navigate(['']), error => alert(error));
+      .subscribe(()=> {
+        this.alertService.success("Foto adicionada com sucesso!!!");
+        this.router.navigate(['/lista', this.userService.getuserName()]);
+      }, error => {
+        console.log(error);
+        this.alertService.danger("Erro ao enviar a foto!!!");
+      });
   }
 
   image(file: File){
