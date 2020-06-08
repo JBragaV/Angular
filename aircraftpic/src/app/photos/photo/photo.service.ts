@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 
 import { Photo } from './photo';
 import { PhotoComment } from '../photo-comment';
+import { map, catchError } from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
 
 const urlBase = 'http://localhost:3000/';
 
@@ -28,7 +30,10 @@ export class PhotoService {
         formData.append('description', descicao);
         formData.append('allowComments', permitirComentario ? 'true' : 'false');
         formData.append('imageFile', file);
-        return this.http.post(`${urlBase}photos/upload`, formData);
+        return this.http.post(`${urlBase}photos/upload`, formData, {
+            observe: 'events',
+            reportProgress: true
+        });
     }
 
     selectById(id: number){
@@ -47,5 +52,14 @@ export class PhotoService {
 
     remove(id: number){
         return this.http.delete(`${urlBase}photos/${id}`);
+    }
+
+    like(id: number){
+        return this.http.post(`${urlBase}photos/${id}/like`, {}, {observe: 'response'})
+            .pipe(map(resp => true))
+            .pipe(catchError(erro=>{
+                return erro.status == '304' ? of(false) : throwError(erro);
+                
+            }))
     }
 }

@@ -8,7 +8,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'apj-photo-comment',
-    templateUrl: 'photo-comment.component.html'
+    templateUrl: './photo-comment.component.html',
+    styleUrls: ['./photo-comment.css']
 })
 export class PhotoCommentComponent implements OnInit{
 

@@ -25,20 +25,29 @@ const rotas:Routes = [
         component: PhotoListComponent,
         resolve: {
           photo: PhotoListResolve
+        },
+        data: {
+            title: 'Suas Fotos'
         }
     }, 
     {
         path: 'p/add', 
         component: PhotoFormComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: {
+            title: 'Upload'
+        }
         
     },
     {
         path: 'p/:photoId', 
         component: PhotosDetailsComponent,
-        canActivate: [AuthGuard] 
+        data: {
+            title: 'Detalhes'
+        }
+        //canActivate: [AuthGuard] 
     },
-    {path: '**', component: NotFoundComponent}
+    {path: '**', component: NotFoundComponent, data: {title:'Not Found'}}
 ]
 
 @NgModule({

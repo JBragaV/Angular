@@ -11,8 +11,8 @@ const rotas = [
         component: HomeComponent, 
         canActivate: [LoginAuth],
         children: [
-            {path: '', component: SignInComponent},
-            {path: 'cadastrar', component: SignupComponent},
+            {path: '', component: SignInComponent, data: {title: 'Login'}},
+            {path: 'cadastrar', component: SignupComponent, data: {title: 'Cadastro'}},
         ]
     }    
 ];

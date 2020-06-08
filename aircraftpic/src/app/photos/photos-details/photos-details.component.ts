@@ -43,5 +43,14 @@ export class PhotosDetailsComponent implements OnInit{
                 this.alertService.danger("Erro ao deletar a foto, Tente novamente!!!");
             });
     }
+
+    like(photo: Photo){
+        this.photoService.like(photo.id)
+            .subscribe(liked => {
+                if(liked){
+                    this.photo$ = this.photoService.selectById(photo.id);
+                }
+            })
+    }
     
 }
