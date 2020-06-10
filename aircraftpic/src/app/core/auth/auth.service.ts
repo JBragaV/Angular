@@ -3,8 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
 import { UserService } from '../user/user.service';
+import { environment } from '../../../environments/environment';
 
-const api_base = 'http://localhost:3000'
+const api_base = environment.urlBase;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +20,7 @@ export class AuthService {
   autenticador(userName: string, password: string){
     return this.http
     //tap me faz conseguir acessar o header da resposta vinda do back-end, apos ter configurado no post, observe: "response"
-      .post(`${api_base}/user/login`, {userName, password}, {observe: "response"})
+      .post(`${api_base}user/login`, {userName, password}, {observe: "response"})
       .pipe(tap(res => {
         this.userService.setToken(res.headers.get('x-access-token'));
       }))

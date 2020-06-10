@@ -5,6 +5,7 @@ import { debounceTime } from "rxjs/operators";
 
 import { Photo } from '../photo/photo';
 import { PhotoService } from '../photo/photo.service';
+import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 
 @Component({
   selector: 'apj-photo-list',
@@ -15,12 +16,13 @@ export class PhotoListComponent implements OnInit {
 
   photos: Photo[] = [];
   filtro = '';
-  //debounce: Subject<string> = new Subject<string>();
   pagina: number = 1;
   userName: string = '';
   hasMore: boolean = true;
 
-  constructor(private activedRouter: ActivatedRoute, private service: PhotoService) {}
+  constructor(
+      private activedRouter: ActivatedRoute, 
+      private service: PhotoService) {}
 
   ngOnInit(): void {
     this.activedRouter.params.subscribe(params => {
