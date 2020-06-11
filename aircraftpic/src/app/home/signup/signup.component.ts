@@ -6,6 +6,7 @@ import { UserNotTakenValidatorService } from './user-not-taken.validator.service
 import { lowCaseValidator } from 'src/app/shared/validators/low-case.validator';
 import { NewUser } from './new-user';
 import { SignupService } from './signup.service';
+import { passwordUserNamevalidator } from './my-validators/password-username.validator';
 
 @Component({
     templateUrl: './signup.component.html',
@@ -57,6 +58,8 @@ export class SignupComponent implements OnInit{
                    Validators.maxLength(30)
                 ]
             ], 
+        },{
+            validator: passwordUserNamevalidator
         })
     }
 

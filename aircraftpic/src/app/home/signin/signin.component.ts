@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PlatformDectectionService } from 'src/app/core/plataform-detector/platform-dectection.service';
 
 
@@ -10,6 +10,7 @@ import { PlatformDectectionService } from 'src/app/core/plataform-detector/platf
 })
 export class SignInComponent implements OnInit{
     
+    url: string;
     userLogin: FormGroup;
     //consigo pegar uma referencia a um elemento do dom
     @ViewChild('usuarioInput') usuarioInput: ElementRef<HTMLInputElement>
@@ -18,10 +19,13 @@ export class SignInComponent implements OnInit{
         private formBilder: FormBuilder,
         private authService: AuthService,
         private router: Router,
-        private platformDetectorService: PlatformDectectionService
+        private platformDetectorService: PlatformDectectionService,
+        private activetadRouter: ActivatedRoute
         ) {}
     
     ngOnInit(): void {
+        this.activetadRouter.queryParams
+            .subscribe(params => this.url = params['fromUrl']);
         this.userLogin = this.formBilder.group({
             usuario: ['', Validators.required],
             password: ['', Validators.required]
@@ -33,7 +37,9 @@ export class SignInComponent implements OnInit{
         const password = this.userLogin.get('password').value;
 
         this.authService.autenticador(usuario, password)
-            .subscribe(()=> this.router.navigate(['lista', usuario]),
+            .subscribe(() =>
+                this.url ? this.router.navigateByUrl(this.url) : this.router.navigate(['lista', usuario])
+            ,
              erro=>{
                  console.log(erro);
                  this.platformDetectorService.isBrowser() && 

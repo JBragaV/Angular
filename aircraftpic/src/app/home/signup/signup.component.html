@@ -33,6 +33,7 @@
         <apj-vmessage *ngIf="signupForm.get('password').errors?.required" mensagem='Password é obrigátorio'></apj-vmessage>
         <apj-vmessage *ngIf="signupForm.get('password').errors?.maxlength" mensagem='Tamanho máximo são 30 caracteres'></apj-vmessage>
         <apj-vmessage *ngIf="signupForm.get('password').errors?.minlength" mensagem='Tamanho mínimo são de 6 caracteres'></apj-vmessage>
+        <apj-vmessage *ngIf="signupForm.errors?.equals" mensagem='User Name e password devem ser diferemtes para a sua segurança'></apj-vmessage>
     </div>
 
     <button [disabled]='signupForm.invalid' class="btn btn-primary btn-block">Register</button>

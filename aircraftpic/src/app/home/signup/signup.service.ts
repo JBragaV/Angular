@@ -12,10 +12,10 @@ export class SignupService {
     constructor(private http: HttpClient) {}
 
     checkUserName(userName: string){
-        return this.http.get(`${api_base}/user/exists/${userName}`);
+        return this.http.get(`${api_base}user/exists/${userName}`);
     }
 
     signup(newUser: NewUser){
-        return this.http.post(`${api_base}/user/signup`, newUser);
+        return this.http.post(`${api_base}user/signup`, newUser);
     }
 }
